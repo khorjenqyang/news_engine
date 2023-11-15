@@ -1,4 +1,4 @@
-import { Center, HStack,Switch,useColorMode} from '@chakra-ui/react'
+import { Center, HStack,useColorMode} from '@chakra-ui/react'
 import { MoonIcon, SunIcon } from '@chakra-ui/icons'
 
 const ColorModeSwitch = () => {
@@ -12,10 +12,9 @@ const ColorModeSwitch = () => {
                 <SunIcon onClick={toggleColorMode} color="black"/>
             </Center>
             :
-            <Center backgroundColor={"rgba(213,184,255)"} padding={"8px"} borderRadius={"5px"}>
-                <MoonIcon onClick={toggleColorMode}/>
+            <Center backgroundColor={"#2b2c5a"} padding={"8px"} borderRadius={"5px"}>
+                <MoonIcon onClick={toggleColorMode} color="white"/>
             </Center>}
-            
         </HStack>
     )
 }

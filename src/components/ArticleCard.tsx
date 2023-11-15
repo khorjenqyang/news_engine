@@ -1,4 +1,4 @@
-import { Card,Image,Heading,Text,VStack } from '@chakra-ui/react'
+import { Card,Image,Heading,Text,VStack, Show, Hide } from '@chakra-ui/react'
 import { Article } from '../hooks/useArticles'
 
 interface Props{
@@ -10,15 +10,15 @@ const ArticleCard = ({article}:Props) => {
   return (
 
     <Card
-      direction={{ base: 'column', sm: 'row' }}
+      direction={"row"}
       overflow='hidden'
       margin="10px 0px"
-      height="200px"
+      height={{base:"100px",sm: "120px",md:"200px" }}
     >
 
       <Image
         objectFit='cover'
-        width="200px"
+        width={{sm:"100px",md:"200px" }}
         src={article.urlToImage}
         key={article.title}
       />
@@ -26,11 +26,12 @@ const ArticleCard = ({article}:Props) => {
 
       <VStack position="relative" width="100%" alignItems="center" padding="15px" justifyContent={"space-evenly"}>
 
-        <Text position={"absolute"} top="1" right="1" fontSize="13px">{article.publishedAt.slice(0,10)}</Text>
         <Heading size='md'>{article.title}</Heading>
+        <Hide below="md">
+          <Text position={"absolute"} top="0" right="1" fontSize="13px">{article.publishedAt.slice(0,10)}</Text>
         <Text>{article.description}</Text>
+        </Hide>
         
-          
       </VStack>
       
     </Card>
