@@ -8,12 +8,12 @@ const ColorModeSwitch = () => {
     return (
         <HStack>
             {colorMode==="dark"?
-            <Center backgroundColor={"#f5bd1f"} padding={"8px"} borderRadius={"5px"}>
-                <SunIcon onClick={toggleColorMode} color="black"/>
+            <Center cursor={"pointer"} onClick={toggleColorMode} backgroundColor={"#f5bd1f"} padding={"8px"} borderRadius={"5px"}>
+                <SunIcon  color="black"/>
             </Center>
             :
-            <Center backgroundColor={"#2b2c5a"} padding={"8px"} borderRadius={"5px"}>
-                <MoonIcon onClick={toggleColorMode} color="white"/>
+            <Center cursor={"pointer"}  onClick={toggleColorMode} backgroundColor={"#2b2c5a"} padding={"8px"} borderRadius={"5px"}>
+                <MoonIcon  color="white"/>
             </Center>}
         </HStack>
     )

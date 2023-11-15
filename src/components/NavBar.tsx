@@ -15,7 +15,7 @@ const NavBar = () => {
 
         <HStack>
           <ColorModeSwitch/>
-          <SettingsIcon margin={"0 10px"}/>
+          {/* <SettingsIcon margin={"0 10px"}/> */}
         </HStack>
 
       </HStack>

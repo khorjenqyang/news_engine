@@ -13,24 +13,25 @@ const ArticleCard = ({article}:Props) => {
       direction={"row"}
       overflow='hidden'
       margin="10px 0px"
-      height={{base:"100px",sm: "120px",md:"200px" }}
+      height={{base:"90px",sm: "100px",md:"150px" }}
     >
 
       <Image
         objectFit='cover'
-        width={{sm:"100px",md:"200px" }}
+        minWidth={"100px"}
+        width={{base:"80px",sm:"100px",md:"200px" }}
         src={article.urlToImage}
         key={article.title}
       />
 
 
-      <VStack position="relative" width="100%" alignItems="center" padding="15px" justifyContent={"space-evenly"}>
-
-        <Heading size='md'>{article.title}</Heading>
-        <Hide below="md">
-          <Text position={"absolute"} top="0" right="1" fontSize="13px">{article.publishedAt.slice(0,10)}</Text>
-        <Text>{article.description}</Text>
-        </Hide>
+      <VStack width="100%" alignItems="center" padding="2px 5px" justifyContent={"space-around"}>
+        
+        <Heading fontSize={{ base:"10px",sm:"13px",md:"17px"}}>{article.title}</Heading>
+        <Show above="md" >
+          <Text fontSize={{ md:"13px"}} >{article.description}</Text>
+          <Text fontSize={{ md:"12px"}}>{article.publishedAt.slice(0,10)}</Text>
+        </Show>
         
       </VStack>
       
