@@ -1,7 +1,7 @@
 import ColorModeSwitch from './ColorModeSwitch'
 import { HStack,Image,Text } from '@chakra-ui/react'
 import logo from '../assets/news.png'
-import { SettingsIcon } from '@chakra-ui/icons'
+// import { SettingsIcon } from '@chakra-ui/icons'
 
 const NavBar = () => {
   return (

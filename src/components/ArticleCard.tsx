@@ -1,4 +1,4 @@
-import { Card,Image,Heading,Text,VStack, Show, Hide } from '@chakra-ui/react'
+import { Card,Image,Heading,Text,VStack, Show} from '@chakra-ui/react'
 import { Article } from '../hooks/useArticles'
 
 interface Props{
