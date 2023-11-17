@@ -14,13 +14,15 @@ const ArticleCard = ({article}:Props) => {
       overflow='hidden'
       margin="10px 0px"
       height={{base:"90px",sm: "100px",md:"150px" }}
+      onClick={()=>window.open(article.url, '_blank')}
+      cursor={"pointer"} 
     >
 
       <Image
         objectFit='cover'
         minWidth={"100px"}
         width={{base:"80px",sm:"100px",md:"200px" }}
-        src={article.urlToImage}
+        src={article.image}
         key={article.title}
       />
 

@@ -1,6 +1,7 @@
 import { Input,InputGroup,InputRightElement,Button } from '@chakra-ui/react'
 import { SearchIcon } from '@chakra-ui/icons'
 import { useState } from 'react'
+import {motion} from 'framer-motion'
 
 interface Props{
   onClick:(input:string)=>void
@@ -11,7 +12,12 @@ const SearchBar = ({onClick}:Props) => {
   const [searchValue,setSearchValue] = useState("");
   
   return (
-      <InputGroup size='md' margin="20px 0px">
+      <InputGroup 
+            as={motion.div}
+            whileHover={{scale:1.02}}  
+            size='md' 
+            margin="20px 0px"
+      >
 
           <Input
             pr='4.5rem'

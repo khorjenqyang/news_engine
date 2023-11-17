@@ -28,7 +28,7 @@ const ArticleList = ({searchKeyWord}:Props) => {
 
         setLoading(true)
         ApiClient
-        .get<FetchResponse>("/",{params:{...params,q:searchKeyWord,signal:controller.signal}})
+        .get<FetchResponse>("/search?",{params:{...params,q:searchKeyWord,signal:controller.signal}})
         .then((res)=>{
             setData(res.data.articles.filter(article=>article.title!="[Removed]"))
             setLoading(false)
