@@ -1,4 +1,3 @@
-import './App.css'
 import { useState } from 'react'
 import SearchBar from './components/SearchBar'
 import NavBar from './components/NavBar'
@@ -6,17 +5,25 @@ import ArticleList from './components/ArticleList'
 
 function App() {
  
-  const [searchKeyWord,setSearchKeyWord] = useState("")
+  const [selectedSearchWord,setSelectedSearchWord] = useState("")
+  const [selectedLanguage,setSelectedLanguage] = useState("")
+  const [selectedDateFrom,setSelectedDateFrom] = useState("")
+  const [selectedDateTo,setselectedDateTo] = useState("")
 
   const onSearch = (inputSearchKeyWord:string)=>{
-    setSearchKeyWord(inputSearchKeyWord)
+    setSelectedSearchWord(inputSearchKeyWord)
   } 
 
   return (
     <>
       <NavBar/>
-      <SearchBar onClick={onSearch}/>
-      <ArticleList searchKeyWord={searchKeyWord}/>
+      <SearchBar onSearchKeyWord={onSearch}/>
+      <ArticleList 
+        searchKeyWord={selectedSearchWord}
+        selectedLanguage={selectedLanguage}
+        selectedDateFrom={selectedDateFrom}
+        selectedDateTo={selectedDateTo}
+      />
     </>
   )
 }

@@ -4,10 +4,10 @@ import { useState } from 'react'
 import {motion} from 'framer-motion'
 
 interface Props{
-  onClick:(input:string)=>void
+  onSearchKeyWord:(input:string)=>void
 }
 
-const SearchBar = ({onClick}:Props) => {
+const SearchBar = ({onSearchKeyWord}:Props) => {
 
   const [searchValue,setSearchValue] = useState("");
   
@@ -21,7 +21,7 @@ const SearchBar = ({onClick}:Props) => {
 
           <Input
             pr='4.5rem'
-            placeholder='Search News'
+            placeholder='Search News Keyword'
             value={searchValue}
             onChange={(e)=>{
               setSearchValue(e.target.value)
@@ -29,7 +29,7 @@ const SearchBar = ({onClick}:Props) => {
 
             onKeyDown={(e)=>{
               if(e.key=="Enter"){
-                onClick(searchValue)
+                onSearchKeyWord(searchValue)
               }
             }}
           />
@@ -38,7 +38,7 @@ const SearchBar = ({onClick}:Props) => {
             <Button 
               size='sm' 
               backgroundColor={"transparent"} 
-              onClick={()=>onClick(searchValue)}
+              onClick={()=>onSearchKeyWord(searchValue)}
             >
               <SearchIcon/>
             </Button>

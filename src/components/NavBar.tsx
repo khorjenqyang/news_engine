@@ -1,7 +1,11 @@
 import ColorModeSwitch from './ColorModeSwitch'
-import { HStack,Image,Text } from '@chakra-ui/react'
+import {HStack,Image,Text } from '@chakra-ui/react'
 import logo from '../assets/news.png'
-// import { SettingsIcon } from '@chakra-ui/icons'
+import SettingsBar from './SettingsMenu'
+
+interface Props {
+  
+}
 
 const NavBar = () => {
   return (
@@ -15,7 +19,7 @@ const NavBar = () => {
 
         <HStack>
           <ColorModeSwitch/>
-          {/* <SettingsIcon margin={"0 10px"}/> */}
+          <SettingsBar/>
         </HStack>
 
       </HStack>

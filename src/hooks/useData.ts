@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
-import ApiClient,{params} from '../services/ApiClient'
-import { CanceledError } from 'axios'
+import ApiClient from '../services/ApiClient'
+import { AxiosRequestConfig, CanceledError } from 'axios'
 
 interface FetchResponse<T> {
     articles:T[]
 }
 
-const useData = <T>(searchKeyWord:string)=>{   
+const useData = <T>(deps:any[],requestConfig?:AxiosRequestConfig)=>{   
 
     const [data,setData] = useState<T[]>([])
     const [error,setError] = useState("")
@@ -16,8 +16,9 @@ const useData = <T>(searchKeyWord:string)=>{
         const controller = new AbortController()
 
         setLoading(true)
+
         ApiClient
-        .get<FetchResponse<T>>("/",{params:{...params,q:searchKeyWord,signal:controller.signal}})
+        .get<FetchResponse<T>>("",{signal:controller.signal,...requestConfig})
         .then((res)=>{
             setData(res.data.articles)
             setLoading(false)
@@ -29,7 +30,7 @@ const useData = <T>(searchKeyWord:string)=>{
         })
 
         return ()=>controller.abort()
-    },[])
+    },deps?[...deps]:[])
 
     return {data,error,isLoading}
 

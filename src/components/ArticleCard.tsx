@@ -27,14 +27,15 @@ const ArticleCard = ({article}:Props) => {
       />
 
 
-      <VStack width="100%" alignItems="center" padding="2px 5px" justifyContent={"space-around"}>
+      <VStack width="100%" alignItems="center" padding="2px 5px" justifyContent={"space-evenly"}>
         
         <Heading fontSize={{ base:"10px",sm:"13px",md:"17px"}}>{article.title}</Heading>
         <Show above="md" >
           <Text fontSize={{ md:"13px"}} >{article.description}</Text>
-          <Text fontSize={{ md:"12px"}}>{article.publishedAt.slice(0,10)}</Text>
         </Show>
         
+        <Text fontSize={{ base:"8px",sm:"9px",md:"12px"}}>{article.publishedAt.slice(0,10)}</Text>
+
       </VStack>
       
     </Card>
