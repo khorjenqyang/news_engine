@@ -4,13 +4,13 @@ import { useState } from 'react'
 import {motion} from 'framer-motion'
 
 interface Props{
-  onSearchKeyWord:(input:string)=>void
+  onSearchKeyWord:(input:string)=>void,
 }
 
 const SearchBar = ({onSearchKeyWord}:Props) => {
 
   const [searchValue,setSearchValue] = useState("");
-  
+
   return (
       <InputGroup 
             as={motion.div}

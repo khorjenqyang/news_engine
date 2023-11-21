@@ -12,6 +12,9 @@ interface Props{
 
 const ArticleList = ({searchKeyWord,selectedLanguage,selectedDateFrom,selectedDateTo}:Props) => {
 
+    //trim
+    searchKeyWord = searchKeyWord.trim()
+
     if (searchKeyWord==="") return
     
     const skeletonArray = [1,2,3,4,5,6,7]
@@ -19,9 +22,9 @@ const ArticleList = ({searchKeyWord,selectedLanguage,selectedDateFrom,selectedDa
 
     return (
         <>
-            {error && <Text>{error}</Text>}
+            {error && <Text fontSize={"sm"}>{error}<br/>Please Contact Admin</Text>}
             {isLoading && skeletonArray.map(skeleton=><SkeletonCard key={skeleton}/>)}
-
+            {!error && data.length===0&&<Text fontSize={"sm"}>No News Found<br/> Try Another Keyword</Text>}
             {data.map((article,id)=>(
                 <ArticleCard key={id} article={article}/>
             ))}

@@ -4,10 +4,10 @@ import logo from '../assets/news.png'
 import SettingsBar from './SettingsMenu'
 
 interface Props {
-  
+  setSettings:(selectedLanguage:string,selectedDateFrom:string,selectedDateTo:string)=>void
 }
 
-const NavBar = () => {
+const NavBar = ({setSettings}:Props) => {
   return (
     <>
       <HStack justifyContent="space-between">
@@ -19,7 +19,7 @@ const NavBar = () => {
 
         <HStack>
           <ColorModeSwitch/>
-          <SettingsBar/>
+          <SettingsBar setSettings={setSettings}/>
         </HStack>
 
       </HStack>

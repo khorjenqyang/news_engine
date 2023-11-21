@@ -1,5 +1,6 @@
 import { Card,Image,Heading,Text,VStack, Show} from '@chakra-ui/react'
 import { Article } from '../hooks/useArticles'
+import image from '../assets/broken_image.png'
 
 interface Props{
     article: Article
@@ -8,7 +9,6 @@ interface Props{
 const ArticleCard = ({article}:Props) => {
 
   return (
-
     <Card
       direction={"row"}
       overflow='hidden'
@@ -24,8 +24,11 @@ const ArticleCard = ({article}:Props) => {
         width={{base:"80px",sm:"100px",md:"200px" }}
         src={article.image}
         key={article.title}
+        onError={({ currentTarget }) => {
+          currentTarget.onerror = null;
+          currentTarget.src=image;
+        }}
       />
-
 
       <VStack width="100%" alignItems="center" padding="2px 5px" justifyContent={"space-evenly"}>
         

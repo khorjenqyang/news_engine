@@ -23,9 +23,9 @@ const useData = <T>(deps:any[],requestConfig?:AxiosRequestConfig)=>{
             setData(res.data.articles)
             setLoading(false)
         })
-        .catch(err=>{
+        .catch((err)=>{
             if (err instanceof CanceledError) return
-            setError(err)
+            setError(err.message)
             setLoading(false)
         })
 
