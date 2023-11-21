@@ -24,7 +24,7 @@ const ArticleList = ({searchKeyWord,selectedLanguage,selectedDateFrom,selectedDa
         <>
             {error && <Text fontSize={"sm"}>{error}<br/>Please Contact Admin</Text>}
             {isLoading && skeletonArray.map(skeleton=><SkeletonCard key={skeleton}/>)}
-            {!error && data.length===0&&<Text fontSize={"sm"}>No News Found<br/> Try Another Keyword</Text>}
+            {!error && data.length===0&&<Text fontSize={"sm"}>No News Found<br/>Try Another Keyword</Text>}
             {data.map((article,id)=>(
                 <ArticleCard key={id} article={article}/>
             ))}
