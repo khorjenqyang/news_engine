@@ -29,7 +29,7 @@ const INITIAL_STATE = {
 }
 
 const FnNewsQueryContext = createContext<IContextType>(INITIAL_STATE)
-const UseFnNewsQueryContext = createContext((fnQuery:IQuery)=>{})
+const UseFnNewsQueryContext = createContext((fnQuery:IQuery)=>{console.log(fnQuery)})
 
 const NewsQueryContext = ({children}:Props) => {
 
