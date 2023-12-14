@@ -1,79 +1,83 @@
 import { Text,Box,Select, Input, Menu, MenuButton, MenuList, IconButton } from '@chakra-ui/react'
 import { SettingsIcon } from '@chakra-ui/icons'
-import DropDownConfig from '../config/LanguageDropDown.json';
-import { useState } from 'react';
+import DropDownConfig from '../config/LanguageDropDown';
+import {  useNewsQuery, useUpdateNewsQuery } from '../context/NewsQueryContext';
+import { useRef } from 'react';
 
-interface Props {
-    setSettings:(selectedLanguage:string,selectedDateFrom:string,selectedDateTo:string)=>void
-}
+const SettingsMenu = () => {
 
-const SettingsBar = ({setSettings}:Props) => {
-
-    const [userSettings,setUserSettings] = useState({
-        selectedLanguage:"",
+    const settings = useRef({
+        language:"all",
         selectedDateFrom:"",
         selectedDateTo:""
     })
 
-    const changeSettings = (key:string,value:string)=>{
-        if (value === "") {
-            setUserSettings((prevState)=>({...prevState,[key]:' '}))
-            return
-        }
-        setUserSettings((prevState)=>({...prevState,[key]:value}))
-    }
+    const prevSettings = useRef({...settings.current})
 
-    const triggerSettingsOnClose = ()=>{
-        setSettings(userSettings.selectedLanguage,userSettings.selectedDateFrom,userSettings.selectedDateTo)
+    const {newsQuery} = useNewsQuery()
+    const setNewsQuery = useUpdateNewsQuery()
+
+    const triggerSettingsOnClose = ()=>{  
+
+        if (
+            settings.current.language === prevSettings.current.language &&
+            settings.current.selectedDateFrom === prevSettings.current.selectedDateFrom &&
+            settings.current.selectedDateTo === prevSettings.current.selectedDateTo
+        ) return
+
+        prevSettings.current.language = settings.current.language
+        prevSettings.current.selectedDateFrom = settings.current.selectedDateFrom
+        prevSettings.current.selectedDateTo = settings.current.selectedDateTo
+
+        setNewsQuery({...newsQuery,
+            language:settings.current.language,
+            selectedDateFrom:settings.current.selectedDateFrom,
+            selectedDateTo:settings.current.selectedDateTo
+        })
     }
 
     return (
-
-    <Menu onClose={triggerSettingsOnClose}>
-
         <>
+            <Menu onClose={triggerSettingsOnClose}>
+                <MenuButton height="35px" backgroundColor={"transparent"} as={IconButton} icon={<SettingsIcon />}/>
 
-        <MenuButton height="35px" backgroundColor={"transparent"} as={IconButton} icon={<SettingsIcon />}/>
+                <MenuList>
+                    <Box margin="0px 10px">
+                        <Text margin="10px 0px">News Language</Text>
+                        <Select 
+                            id="language"
+                            onChange={(e)=>{settings.current.language = e.target.value}}
+                        >
+                            {Object.entries(DropDownConfig).map(([language, code]) => (
+                                <option key={code} value={code}>
+                                    {language}
+                                </option>
+                            ))}
+                        </Select>
+                    </Box>
 
-        <MenuList>
-            <Box margin="0px 10px">
-                <Text margin="10px 0px">News Language</Text>
-                <Select 
-                    id="language"
-                    onChange={(e)=>changeSettings("selectedLanguage",e.target.value)}
-                >
-                    {Object.entries(DropDownConfig).map(([language, code]) => (
-                        <option key={code} value={code}>
-                            {language}
-                        </option>
-                    ))}
-                </Select>
-            </Box>
+                    <Box margin="15px 10px">
+                        <Text margin="10px 0px" >Date (From)</Text>
+                        <Input
+                            type="date"
+                            id="datefrom"
+                            onChange={(e)=>{settings.current.selectedDateFrom = e.target.value}}
+                        />
+                    </Box>
 
-            <Box margin="15px 10px">
-                <Text margin="10px 0px" >Date (From)</Text>
-                <Input
-                    type="date"
-                    id="datefrom"
-                    onChange={(e)=>changeSettings("selectedDateFrom",e.target.value)}
-                />
-            </Box>
+                    <Box margin="10px 10px">
+                        <Text margin="10px 0px" >Date (To)</Text>
+                        <Input
+                            type="date"
+                            id="datefrom"
+                            onChange={(e)=>{settings.current.selectedDateTo = e.target.value}}
+                        />
+                    </Box>
 
-            <Box margin="10px 10px">
-                <Text margin="10px 0px" >Date (To)</Text>
-                <Input
-                    type="date"
-                    id="datefrom"
-                    onChange={(e)=>changeSettings("selectedDateTo",e.target.value)}
-                />
-            </Box>
-
-        </MenuList>
-
+                </MenuList>
+            </Menu>
         </>
-
-    </Menu>
     )
 }
 
-export default SettingsBar
+export default SettingsMenu

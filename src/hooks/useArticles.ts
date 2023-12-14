@@ -1,7 +1,8 @@
 import useData from "./useData";
 import {baseParams} from '../services/ApiClient'
+import { IQuery } from "../context/NewsQueryContext";
 
-export interface Article {
+export interface Article{
     title:string,
     description:string,
     content:string,
@@ -10,17 +11,17 @@ export interface Article {
     image:string
 }
 
-const useArticles = (searchKeyWord:string,selectedLanguage:string,selectedDateFrom:string,selectedDateTo:string) => {
+const useArticles = (newsQuery:IQuery) => {
     
     const requestParam = {
         ...baseParams,
-        q:searchKeyWord,
-        lang:selectedLanguage.toLowerCase()==="all"?"":selectedLanguage,
-        from:selectedDateFrom.trim()?selectedDateFrom + "T00:00:00Z":"",
-        to:selectedDateTo.trim()?selectedDateTo + "T00:00:00Z":""
+        q:newsQuery.searchWord,
+        lang:newsQuery.language.toLowerCase()==="all"?"":newsQuery.language,
+        from:newsQuery.selectedDateFrom.trim()?newsQuery.selectedDateFrom + "T00:00:00Z":"",
+        to:newsQuery.selectedDateTo.trim()?newsQuery.selectedDateTo + "T00:00:00Z":""
     }
 
-    return useData<Article>([searchKeyWord,selectedLanguage,selectedDateFrom,selectedDateTo],{params:{...requestParam}})
+    return useData<Article>([newsQuery],{params:{...requestParam}})
 }
 
 export default useArticles;

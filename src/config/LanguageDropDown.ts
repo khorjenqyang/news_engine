@@ -1,4 +1,4 @@
-{
+export default {
     "All":"all",
     "Arabic": "ar",
     "Chinese": "zh",

@@ -1,13 +1,9 @@
 import ColorModeSwitch from './ColorModeSwitch'
 import {HStack,Image,Text } from '@chakra-ui/react'
-import logo from '../assets/news.png'
-import SettingsBar from './SettingsMenu'
+import logo from '/news.png'
+import SettingsMenu from './SettingsMenu'
 
-interface Props {
-  setSettings:(selectedLanguage:string,selectedDateFrom:string,selectedDateTo:string)=>void
-}
-
-const NavBar = ({setSettings}:Props) => {
+const NavBar = () => {
   return (
     <>
       <HStack justifyContent="space-between">
@@ -19,7 +15,7 @@ const NavBar = ({setSettings}:Props) => {
 
         <HStack>
           <ColorModeSwitch/>
-          <SettingsBar setSettings={setSettings}/>
+          <SettingsMenu/>
         </HStack>
 
       </HStack>

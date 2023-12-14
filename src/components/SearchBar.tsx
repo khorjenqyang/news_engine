@@ -1,15 +1,19 @@
 import { Input,InputGroup,InputRightElement,Button } from '@chakra-ui/react'
 import { SearchIcon } from '@chakra-ui/icons'
-import { useState } from 'react'
 import {motion} from 'framer-motion'
+import { useRef } from 'react'
+import { useNewsQuery, useUpdateNewsQuery } from '../context/NewsQueryContext'
 
-interface Props{
-  onSearchKeyWord:(input:string)=>void,
-}
+const SearchBar = () => {
 
-const SearchBar = ({onSearchKeyWord}:Props) => {
+  const input = useRef() as React.MutableRefObject<HTMLInputElement>
 
-  const [searchValue,setSearchValue] = useState("");
+  const {newsQuery} = useNewsQuery()
+  const setNewsQuery = useUpdateNewsQuery()
+
+  function onClick(){
+    setNewsQuery({...newsQuery,searchWord:input.current.value})
+  }
 
   return (
       <InputGroup 
@@ -18,27 +22,24 @@ const SearchBar = ({onSearchKeyWord}:Props) => {
             size='md' 
             margin="20px 0px"
       >
-
           <Input
             pr='4.5rem'
             placeholder='Search News Keyword'
-            value={searchValue}
-            onChange={(e)=>{
-              setSearchValue(e.target.value)
-            }}
+            ref={input}
 
             onKeyDown={(e)=>{
               if(e.key=="Enter"){
-                onSearchKeyWord(searchValue)
+                onClick()
               }
             }}
+            
           />
 
           <InputRightElement width='4.5rem'>
             <Button 
               size='sm' 
               backgroundColor={"transparent"} 
-              onClick={()=>onSearchKeyWord(searchValue)}
+              onClick={()=>onClick()}
             >
               <SearchIcon/>
             </Button>
