@@ -14,7 +14,7 @@ const SettingsMenu = () => {
 
     const prevSettings = useRef({...settings.current})
 
-    const {newsQuery} = useNewsQuery()
+    const newsQuery = useNewsQuery()
     const setNewsQuery = useUpdateNewsQuery()
 
     const triggerSettingsOnClose = ()=>{  

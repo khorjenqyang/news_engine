@@ -6,7 +6,7 @@ import { useNewsQuery } from './context/NewsQueryContext'
 
 function App() {
   
-  const {newsQuery} = useNewsQuery()
+  const newsQuery = useNewsQuery()
 
   return (
     <>

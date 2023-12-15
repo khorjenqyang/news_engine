@@ -11,10 +11,7 @@ export type IQuery = {
     selectedDateTo:string
 }
 
-type IContextType = {
-    newsQuery:IQuery,
-    setQuery:React.Dispatch<React.SetStateAction<IQuery>>
-}
+type IUseFnNewsQueryContext = (fnQuery: IQuery) => void;
 
 const INITIAL_QUERY = {
     searchWord:"",
@@ -23,13 +20,8 @@ const INITIAL_QUERY = {
     selectedDateTo:""
 }
 
-const INITIAL_STATE = {
-    newsQuery:INITIAL_QUERY,
-    setQuery:()=>{}
-}
-
-const FnNewsQueryContext = createContext<IContextType>(INITIAL_STATE)
-const UseFnNewsQueryContext = createContext((fnQuery:IQuery)=>{console.log(fnQuery)})
+const FnNewsQueryContext = createContext<IQuery>(INITIAL_QUERY)
+const UseFnNewsQueryContext = createContext<IUseFnNewsQueryContext>(()=>{})
 
 const NewsQueryContext = ({children}:Props) => {
 
@@ -39,13 +31,8 @@ const NewsQueryContext = ({children}:Props) => {
         setQuery(fnQuery)
     }
 
-    const value = {
-        newsQuery,
-        setQuery
-    }
-    
     return (
-        <FnNewsQueryContext.Provider value={value}>
+        <FnNewsQueryContext.Provider value={newsQuery}>
             <UseFnNewsQueryContext.Provider value={updateSetQuery}>
                 {children}
             </UseFnNewsQueryContext.Provider>
